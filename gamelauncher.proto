@@ -4,11 +4,11 @@ package gamelauncher;
 
 service GameService
 {
-	rpc CheckVersion (VersionRequest) return (VersionResponse);
+	rpc CheckVersion (VersionRequest) returns (VersionResponse);
 
-	rpc DownloadGame (DownloadRequest) return (stream GameData);
+	rpc DownloadGame (DownloadRequest) returns (stream GameData);
 
-	rpc WaitUpdate (Identificial) return (stream UpdateNotice);
+	rpc WaitUpdate (Identificial) returns (stream UpdateNotice);
 }
 
 message VersionRequest
