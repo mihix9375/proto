@@ -9,6 +9,10 @@ service GameService
 	rpc DownloadGame (DownloadRequest) returns (stream GameData);
 
 	rpc WaitUpdate (Identificial) returns (stream UpdateNotice);
+
+	rpc ListComments (CommentListRequest) returns (CommentListResponse);
+
+	rpc AddComment (AddCommentRequest) returns (Comment);
 }
 
 message VersionRequest
@@ -44,4 +48,30 @@ message UpdateNotice
 {
 	string game_id = 1;
 	string version = 2;
+}
+
+message CommentListRequest
+{
+	string game_id = 1;
+}
+
+message CommentListResponse
+{
+	repeated Comment comments = 1;
+}
+
+message AddCommentRequest
+{
+	string game_id = 1;
+	string author = 2;
+	string content = 3;
+}
+
+message Comment
+{
+	string id = 1;
+	string game_id = 2;
+	string author = 3;
+	string content = 4;
+	int64 created_at = 5;
 }
