@@ -8,6 +8,10 @@ service GameService
 
 	rpc DownloadGame (DownloadRequest) returns (stream GameData);
 
+	rpc GetGameManifest (DownloadRequest) returns (GameManifest);
+
+	rpc DownloadGameFiles (GameFilesRequest) returns (stream GameFileData);
+
 	rpc WaitUpdate (Identificial) returns (stream UpdateNotice);
 
 	rpc ListComments (CommentListRequest) returns (CommentListResponse);
@@ -37,6 +41,35 @@ message GameData
 {
 	bytes data = 1;
 	int32 index = 2;
+}
+
+message GameManifest
+{
+	string game_id = 1;
+	string version = 2;
+	repeated GameFile files = 3;
+}
+
+message GameFile
+{
+	string path = 1;
+	uint64 size = 2;
+	string sha256 = 3;
+}
+
+message GameFilesRequest
+{
+	string game_id = 1;
+	string version = 2;
+	repeated string paths = 3;
+}
+
+message GameFileData
+{
+	string path = 1;
+	bytes data = 2;
+	uint64 offset = 3;
+	bool complete = 4;
 }
 
 message Identificial
