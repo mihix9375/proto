@@ -76,12 +76,20 @@ message GameFileData
 message Identificial
 {
 	string ip_addr = 1;
+	repeated string installed_game_ids = 2;
 }
 
 message UpdateNotice
 {
 	string game_id = 1;
 	string version = 2;
+	UpdateAction action = 3;
+}
+
+enum UpdateAction
+{
+	UPSERT = 0;
+	DELETE = 1;
 }
 
 message CommentListRequest
