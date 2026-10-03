@@ -84,12 +84,15 @@ message UpdateNotice
 	string game_id = 1;
 	string version = 2;
 	UpdateAction action = 3;
+	// Explicit administrator request; sent as one batch, never replayed on reconnect.
+	repeated DownloadRequest downloads = 4;
 }
 
 enum UpdateAction
 {
 	UPSERT = 0;
 	DELETE = 1;
+	DOWNLOAD = 2;
 }
 
 message CommentListRequest
